@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="http://cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.min.js"></script>
+  
+  
+ 
+</head>
+<body>
+<script>
+$(function(){
+   
+         $.ajax({
+             type: "get",
+             url: "/user",
+             data: {name:"xiaobin", content:"123456789"},
+             dataType: "json",
+             success: function(data){
+			 alert(data.firstname)
+			 console.log(data);                    
+                         
+                      
+                        
+                      }
+         });
+    
+});
+
+</script>
+  
+</body>
+<html>
