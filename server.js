@@ -3,9 +3,9 @@ var fs = require('fs');
 var url = require('url');
 
 
-// ´´½¨·şÎñÆ÷
+// åˆ›å»ºæœåŠ¡å™¨
 http.createServer( function (request, response) {  
-   // ½âÎöÇëÇó£¬°üÀ¨ÎÄ¼şÃû
+   // è§£æè¯·æ±‚ï¼ŒåŒ…æ‹¬æ–‡ä»¶å
    var pathname = url.parse(request.url).pathname;
    var arg = url.parse(request.url).query;
  
@@ -17,23 +17,24 @@ http.createServer( function (request, response) {
     console.log("arg1.name for " + arg1.name );
   
    
-   // Êä³öÇëÇóµÄÎÄ¼şÃû
+   // è¾“å‡ºè¯·æ±‚çš„æ–‡ä»¶å
    console.log("Request for " + pathname + " received.");
    
-   // ´ÓÎÄ¼şÏµÍ³ÖĞ¶ÁÈ¡ÇëÇóµÄÎÄ¼şÄÚÈİ
+   // ä»æ–‡ä»¶ç³»ç»Ÿä¸­è¯»å–è¯·æ±‚çš„æ–‡ä»¶å†…å®¹
    fs.readFile(pathname.substr(1), function (err, data) {
       if (err) {
          console.log(err);
-         // HTTP ×´Ì¬Âë: 404 : NOT FOUND
+         // HTTP çŠ¶æ€ç : 404 : NOT FOUND
          // Content Type: text/plain
          response.writeHead(404, {'Content-Type': 'text/html'});
       }else{	         
-         // HTTP ×´Ì¬Âë: 200 : OK
+         // HTTP çŠ¶æ€ç : 200 : OK
          // Content Type: text/plain
          response.writeHead(200, {'Content-Type': 'text/html'});	
-           response.write("Hello World");
-         // ÏìÓ¦ÎÄ¼şÄÚÈİ
-         response.write(data.toString());		
+          // response.write("Hello World");
+         // å“åº”æ–‡ä»¶å†…å®¹
+        // response.write(data.toString());
+          response.write(data, "binary");
       }
 	  
 	  if (pathname=="/user"){ 
@@ -48,10 +49,10 @@ http.createServer( function (request, response) {
 	     
      
 	  
-      //  ·¢ËÍÏìÓ¦Êı¾İ
+      //  å‘é€å“åº”æ•°æ®
       response.end();
    });   
 }).listen(8081);
 
-// ¿ØÖÆÌ¨»áÊä³öÒÔÏÂĞÅÏ¢
+// æ§åˆ¶å°ä¼šè¾“å‡ºä»¥ä¸‹ä¿¡æ¯
 console.log('Server running at http://127.0.0.1:8081/');
